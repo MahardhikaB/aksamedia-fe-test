@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useState } from 'react';
-import { CiMenuFries } from "react-icons/ci"
+import { CiMenuFries } from "react-icons/ci";
 import { AiOutlineClose } from 'react-icons/ai';
 
 const Header = () => {
@@ -32,7 +32,7 @@ const Header = () => {
             </div>
 
             {/* Sidebar Menu */}
-            <div className={`fixed top-0 left-0 h-full w-3/4 max-w-xs bg-gray-900 text-white transform ${menuOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out z-50`}>
+            <div className={`fixed top-0 right-0 h-full w-3/4 max-w-xs bg-gray-900 text-white transform ${menuOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 ease-in-out z-50`}>
                 <div className="flex justify-between items-center p-6">
                     {/* Sidebar Logo */}
                     <h1 className="text-3xl font-semibold">YrkH<span className="text-blue-500">.</span></h1>

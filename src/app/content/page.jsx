@@ -159,7 +159,7 @@ export default function Content() {
                                         <td className="px-4 py-2">{karyawan.id}</td>
                                         <td className="px-4 py-2">{karyawan.namaDepan}</td>
                                         <td className="px-4 py-2">{karyawan.namaBelakang}</td>
-                                        <td className="px-4 py-2 flex items-center">
+                                        <td className="px-4 py-2 flex items-center ml-2">
                                             <button 
                                                 className="text-yellow-500 hover:text-yellow-600 mr-2"
                                                 onClick={() => openEditModal(karyawan)}

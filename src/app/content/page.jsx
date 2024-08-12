@@ -133,13 +133,13 @@ export default function Content() {
                     </div>
                     
                     {/* Search Bar */}
-                    <div className="flex items-center mb-4 justify-center md:justify-start lg:justify-start">
-                        <label className="text-[#1c1c22] dark:text-white mr-2">Search:</label>
+                    <div className="flex items-center mb-4 justify-start">
+                        <label className="text-[#1c1c22] dark:text-white mr-2 font-semibold">Search:</label>
                         <input 
                             type="text" 
                             value={searchKeyword}
                             onChange={handleSearchChange}
-                            className="px-4 py-2 font-semibold text-[#1c1c22] border ring-1 ring-[#03346E] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3287db]"
+                            className="px-4 py-2 w-52 h-8 font-semibold text-[#1c1c22] border ring-1 ring-[#03346E] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3287db]"
                         />
                     </div>
 

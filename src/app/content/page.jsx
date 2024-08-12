@@ -2,7 +2,7 @@
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import AddDataModal from "@/components/AddDataModal";
 import EditDataModal from "@/components/EditDataModal";
@@ -116,6 +116,7 @@ export default function Content() {
     };
 
     return (
+        <Suspense fallback={<div>Loading...</div>}>
         <div className="flex flex-col">
             <div>
                 <Header />
@@ -207,7 +208,7 @@ export default function Content() {
                     </div>
                 </div>
             </div>
-            
+
             {/* Modals */}
             <AddDataModal isOpen={isAddModalOpen} onClose={closeAddModal} onAddData={handleAddData} />
             <EditDataModal 
@@ -226,5 +227,6 @@ export default function Content() {
                 <Footer />
             </div>
         </div>
+        </Suspense>
     );
 }

@@ -1,25 +1,48 @@
 import { useEffect, useState } from 'react';
+import { FaSun, FaMoon, FaDesktop } from 'react-icons/fa';
 
 const Footer = () => {
-    const [isToggled, setIsToggled] = useState(false);
+    const [theme, setTheme] = useState('system'); // Default to system theme
+    const [isSystem, setIsSystem] = useState(true);
 
     useEffect(() => {
-        const currentTheme = localStorage.getItem('theme');
-        if (currentTheme === 'dark') {
-            setIsToggled(true);
-            document.documentElement.classList.add('dark');
-        }
-    }
-    , []);
+        const currentTheme = localStorage.getItem('theme') || 'system';
+        const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-    const handleToggle = () => {
-        setIsToggled(!isToggled);
-        if (!isToggled) {
-            localStorage.setItem('theme', 'dark');
+        if (currentTheme === 'dark') {
+            setTheme('dark');
             document.documentElement.classList.add('dark');
-        } else {
-            localStorage.setItem('theme', 'light');
+        } else if (currentTheme === 'light') {
+            setTheme('light');
             document.documentElement.classList.remove('dark');
+        } else {
+            setIsSystem(true);
+            if (prefersDarkScheme) {
+                setTheme('dark');
+                document.documentElement.classList.add('dark');
+            } else {
+                setTheme('light');
+                document.documentElement.classList.remove('dark');
+            }
+        }
+    }, []);
+
+    const handleThemeChange = (newTheme) => {
+        setTheme(newTheme);
+        setIsSystem(newTheme === 'system');
+        localStorage.setItem('theme', newTheme);
+
+        if (newTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else if (newTheme === 'light') {
+            document.documentElement.classList.remove('dark');
+        } else {
+            const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            if (prefersDarkScheme) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
         }
     };
 
@@ -28,13 +51,25 @@ const Footer = () => {
             <p className="text-sm">
                 Made with ❤️ by <span className="font-semibold">Yorkha</span>
             </p>
-            <div 
-                className={`relative w-12 h-6 flex items-center bg-gray-300 rounded-full p-1 cursor-pointer ${isToggled ? 'bg-slate-950' : 'bg-gray-300'}`}
-                onClick={handleToggle}
-            >
-                <div
-                    className={`w-5 h-5 bg-[#3287db] rounded-full shadow-md transform ${isToggled ? 'translate-x-5' : 'translate-x-0'}`}
-                />
+            <div className="flex space-x-4">
+                <button
+                    onClick={() => handleThemeChange('light')}
+                    className={`px-4 py-2 rounded-md ${theme === 'light' ? 'bg-slate-700 text-white' : 'bg-gray-300 text-[#1c1c22]'}`}
+                >
+                    <FaSun />
+                </button>
+                <button
+                    onClick={() => handleThemeChange('dark')}
+                    className={`px-4 py-2 rounded-md ${theme === 'dark' ? 'bg-slate-700 text-white' : 'bg-gray-300 text-[#1c1c22]'}`}
+                >
+                    <FaMoon />
+                </button>
+                <button
+                    onClick={() => handleThemeChange('system')}
+                    className={`px-4 py-2 rounded-md ${isSystem ? 'bg-slate-700 text-white' : 'bg-gray-300 text-[#1c1c22]'}`}
+                >
+                    <FaDesktop />
+                </button>
             </div>
         </footer>
     );

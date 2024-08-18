@@ -12,6 +12,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 export default function Content() {
     const pathname = usePathname();
     const searchParams = useSearchParams();
+
     const [currentPage, setCurrentPage] = useState(1);
     const [searchKeyword, setSearchKeyword] = useState("");
     const dataPerPage = 7;
@@ -58,6 +59,7 @@ export default function Content() {
 
     const indexOfLastData = currentPage * dataPerPage;
     const indexOfFirstData = indexOfLastData - dataPerPage;
+
     const currentData = data
         .filter((karyawan) => 
             karyawan.namaDepan.toLowerCase().includes(searchKeyword.toLowerCase()) || 
@@ -77,17 +79,21 @@ export default function Content() {
         setCurrentPage(1);
     };
 
+    // Add space in table if data < 7
     const emptyRows = dataPerPage - currentData.length;
 
+    // Add Modal
     const openAddModal = () => setIsAddModalOpen(true);
     const closeAddModal = () => setIsAddModalOpen(false);
 
+    // Edit Modal
     const openEditModal = (karyawan) => {
         setSelectedKaryawan(karyawan);
         setIsEditModalOpen(true);
     };
     const closeEditModal = () => setIsEditModalOpen(false);
 
+    // Delete Modal
     const openDeleteModal = (karyawan) => {
         setSelectedKaryawan(karyawan);
         setIsDeleteModalOpen(true);
@@ -180,8 +186,6 @@ export default function Content() {
                                 {Array.from({ length: emptyRows }).map((_, index) => (
                                     <tr key={index + currentData.length} className="border-t">
                                         <td className="px-4 py-2">&nbsp;</td>
-                                        <td className="px-4 py-2">&nbsp;</td>
-                                        <td className="px-4 py-2">&nbsp;</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -209,7 +213,11 @@ export default function Content() {
             </div>
             
             {/* Modals */}
-            <AddDataModal isOpen={isAddModalOpen} onClose={closeAddModal} onAddData={handleAddData} />
+            <AddDataModal 
+                isOpen={isAddModalOpen} 
+                onClose={closeAddModal} 
+                onAddData={handleAddData} 
+            />
             <EditDataModal 
                 isOpen={isEditModalOpen} 
                 onClose={closeEditModal} 

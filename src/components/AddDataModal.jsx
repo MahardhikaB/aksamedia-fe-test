@@ -13,6 +13,11 @@ export default function AddDataModal({ isOpen, onClose, onAddData }) {
         }
     }, [isOpen]);
 
+    const resetForm = () => {
+        setNamaDepan("");
+        setNamaBelakang("");
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (namaDepan && namaBelakang) {
@@ -20,11 +25,6 @@ export default function AddDataModal({ isOpen, onClose, onAddData }) {
             resetForm();
             onClose();
         }
-    };
-
-    const resetForm = () => {
-        setNamaDepan("");
-        setNamaBelakang("");
     };
 
     if (!isOpen && !showModal) return null;

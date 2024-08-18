@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { FaSun, FaMoon, FaDesktop } from 'react-icons/fa';
 
 const Footer = () => {
-    const [theme, setTheme] = useState('system'); // Default to system theme
+    const [theme, setTheme] = useState('system');
     const [isSystem, setIsSystem] = useState(true);
 
     useEffect(() => {
